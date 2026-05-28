@@ -1,153 +1,951 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VenuHR.com</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7ff;
+overflow-x:hidden;
+color:#111827;
+}
+
+.header{
+background:
+linear-gradient(rgba(0,32,96,0.88),rgba(0,15,60,0.88)),
+url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1400&auto=format&fit=crop');
+
+background-size:cover;
+background-position:center;
+padding:90px 20px;
+text-align:center;
+color:white;
+}
+
+.header h1{
+font-size:58px;
+font-weight:800;
+}
+
+.header p{
+font-size:22px;
+margin-top:10px;
+}
+
+.top-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:30px 20px;
+max-width:1300px;
+margin:auto;
+margin-top:-50px;
+}
+
+.stat-card{
+background:white;
+padding:28px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.stat-card h2{
+font-size:38px;
+color:#2563eb;
+margin-bottom:10px;
+}
+
+.search-section{
+padding:10px 20px 30px;
+}
+
+.search-box{
+max-width:1300px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.search-box input,
+.search-box select{
+padding:16px;
+border:none;
+outline:none;
+background:#eef3ff;
+border-radius:14px;
+font-size:15px;
+}
+
+.jobs-section{
+padding:20px;
+max-width:1400px;
+margin:auto;
+}
+
+.section-title{
+font-size:34px;
+font-weight:800;
+margin-bottom:25px;
+}
+
+.jobs-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.job-card{
+background:white;
+padding:28px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+transition:0.3s;
+position:relative;
+overflow:hidden;
+}
+
+.job-card:hover{
+transform:translateY(-8px);
+}
+
+.job-card::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:7px;
+background:linear-gradient(90deg,#2563eb,#06b6d4);
+}
+
+.company{
+font-size:14px;
+font-weight:700;
+color:#2563eb;
+margin-bottom:15px;
+}
+
+.job-title{
+font-size:30px;
+font-weight:800;
+margin-bottom:18px;
+}
+
+.job-info{
+font-size:16px;
+margin-bottom:12px;
+color:#4b5563;
+}
+
+.tags{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.tag{
+padding:8px 14px;
+background:#dbeafe;
+color:#2563eb;
+font-size:13px;
+font-weight:700;
+border-radius:50px;
+}
+
+.apply-btn{
+width:100%;
+margin-top:24px;
+padding:16px;
+border:none;
+border-radius:16px;
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+color:white;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+transition:0.3s;
+}
+
+.apply-btn:hover{
+transform:scale(1.02);
+}
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:none;
+justify-content:center;
+align-items:flex-start;
+overflow-y:auto;
+padding:40px 15px;
+z-index:9999;
+}
+
+.popup-content{
+width:100%;
+max-width:550px;
+background:white;
+padding:30px;
+border-radius:25px;
+position:relative;
+}
+
+.close-btn{
+position:absolute;
+right:18px;
+top:10px;
+font-size:35px;
+cursor:pointer;
+}
+
+.popup h2{
+text-align:center;
+margin-bottom:25px;
+color:#2563eb;
+}
+
+.input-box{
+margin-bottom:18px;
+}
+
+.input-box label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.input-box input,
+.input-box select,
+.input-box textarea{
+width:100%;
+padding:15px;
+border:none;
+outline:none;
+border-radius:14px;
+background:#f3f6ff;
+font-size:15px;
+}
+
+textarea{
+resize:none;
+height:90px;
+}
+
+.submit-btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+background:#16a34a;
+color:white;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+}
+
+.no-job{
+text-align:center;
+padding:50px;
+font-size:24px;
+font-weight:700;
+}
+
+.footer{
+background:#071b63;
+margin-top:60px;
+padding:40px 20px;
+text-align:center;
+color:white;
+}
+
+.whatsapp-btn{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#22c55e;
+color:white;
+padding:16px 24px;
+border-radius:50px;
+text-decoration:none;
+font-weight:700;
+z-index:999;
+}
+
+.action-buttons{
+display:flex;
+gap:15px;
+margin-top:25px;
+}
+
+.share-btn{
+flex:1;
+background:#22c55e;
+padding:16px;
+border-radius:16px;
+text-align:center;
+color:white;
+text-decoration:none;
+font-weight:700;
+}
+
+@media(max-width:900px){
+
+.search-box{
+grid-template-columns:1fr 1fr;
+}
+
+.header h1{
+font-size:40px;
+}
+
+}
+
+@media(max-width:600px){
+
+.search-box{
+grid-template-columns:1fr;
+}
+
+.header h1{
+font-size:34px;
+}
+
+.header p{
+font-size:16px;
+}
+
+.job-title{
+font-size:24px;
+}
+
+.action-buttons{
+flex-direction:column;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <br>
-  <center>
-  <form class="gform pure-form pure-form-stacked" method="POST" data-email="wecrazythoughts@gmail.com"
-  action="https://script.google.com/macros/s/AKfycbyAsqafWijN2RUII-Cz1dcGx5O2HC_La2HvEVy1PNxT-p7GPdjMKVFdK7lPNDDI4TGG/exec">
-    <div class="form-elements"><br>
-      <div style="background:none;border:8px solid gray;border-radius: 30px;width: 400px;padding-top: 15px;padding-bottom: 40px;padding-left: 20px;padding-right: 20px;"><br>
-        <b class="content-head" style="font-size: 2.3em;">Contact Us!</b>
-        <br><br>
-         <b style="margin-left: -255px;font-size: 1.3em;">Name</b><br>
-        <input type="text" name="name" required="" style="font-size: 1em;width: 300px;"/><br><br>
 
-        <b style="margin-left: -255px;font-size: 1.3em;">Email</b><br>
-        <input type="email" name="email" required="" style="font-size: 1em;width: 300px;"/><br><br>
+<div class="header">
 
-         <b style="margin-left: -255px;font-size: 1.3em;">Phone</b><br>
-         <input type="number"  name="phone" required="" style="font-size: 1em;width: 300px;"/><br><br>
-      
-        <b style="margin-left: -110px;font-size: 1.3em;">How can we help you?</b><br>
-        <textarea  name="message" rows="5" cols="22" required="" style="font-size: 1.3em;width: 300px;"></textarea><br><br>
-    
-        <button style="float: right;width: 100px;height: 27px;font-size: 1.1em;margin-right: 48px;">
-        send</button><br>
-      </div>
-    </div>
+<h1>Venuhr.com</h1>
 
-    <!-- Thankyou_message --><br>
-    <div class="thankyou_message" style="display:none;background:none;border:8px solid gray;border-radius: 40px;width: 400px;padding-top: 15px;padding-bottom: 40px;padding-left: 20px;padding-right: 20px;"><br><br>
-      <h1>Thanks for contacting us!</h1>
-      <h1>*******</h1>
-    </div>
-  </form>
-  <script data-cfasync="false" type="text/javascript">
-    
-   (function() {
-  function validEmail(email) {
-    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return re.test(email);
-  }
+<p>Find Latest Jobs in Hyderabad 🚀</p>
 
-  function validateHuman(honeypot) {
-    if (honeypot) {
-      console.log("Robot Detected!");
-      return true;
-    } else {
-      console.log("Welcome Human!");
-    }
-  }
-  function getFormData(form) {
-    var elements = form.elements;
+</div>
 
-    var fields = Object.keys(elements).filter(function(k) {
-          return (elements[k].name !== "honeypot");
-    }).map(function(k) {
-      if(elements[k].name !== undefined) {
-        return elements[k].name;
-      }else if(elements[k].length > 0){
-        return elements[k].item(0).name;
-      }
-    }).filter(function(item, pos, self) {
-      return self.indexOf(item) == pos && item;
-    });
+<div class="top-stats">
 
-    var formData = {};
-    fields.forEach(function(name){
-      var element = elements[name];
-      formData[name] = element.value;
-      if (element.length) {
-        var data = [];
-        for (var i = 0; i < element.length; i++) {
-          var item = element.item(i);
-          if (item.checked || item.selected) {
-            data.push(item.value);
-          }
-        }
-        formData[name] = data.join(', ');
-      }
-    });
+<div class="stat-card">
+<h2 id="totalJobs">0</h2>
+<p>Total Jobs</p>
+</div>
 
-    // add form-specific values into the data
-    formData.formDataNameOrder = JSON.stringify(fields);
-    formData.formGoogleSheetName = form.dataset.sheet || "Sheet1"; // default sheet name
-    formData.formGoogleSendEmail = form.dataset.email || ""; // no email by default
+<div class="stat-card">
+<h2>50+</h2>
+<p>Companies</p>
+</div>
 
-    console.log(formData);
-    return formData;
-  }
+<div class="stat-card">
+<h2>1000+</h2>
+<p>Candidates</p>
+</div>
 
-  function handleFormSubmit(event) {  
-    event.preventDefault();           
-    var form = event.target;
-    var data = getFormData(form);         
-    if( data.email && !validEmail(data.email) ) {   
-      var invalidEmail = form.querySelector(".email-invalid");
-      if (invalidEmail) {
-        invalidEmail.style.display = "block";
-        return false;
-      }
-    } else {
-      disableAllButtons(form);
-      var url = form.action;
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', url);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.onreadystatechange = function() {
-          console.log(xhr.status, xhr.statusText);
-          console.log(xhr.responseText);
-          var formElements = form.querySelector(".form-elements")
-          if (formElements) {
-            formElements.style.display = "none"; // hide form
-          }
-          var thankYouMessage = form.querySelector(".thankyou_message");
-          if (thankYouMessage) {
-            thankYouMessage.style.display = "block";
-          }
-          return;
-      };
-      var encoded = Object.keys(data).map(function(k) {
-          return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
-      }).join('&');
-      xhr.send(encoded);
-    }
-  }
-  
-  function loaded() {
-    console.log("Contact form submission handler loaded successfully.");
-    var forms = document.querySelectorAll("form.gform");
-    for (var i = 0; i < forms.length; i++) {
-      forms[i].addEventListener("submit", handleFormSubmit, false);
-    }
-  };
-  document.addEventListener("DOMContentLoaded", loaded, false);
+<div class="stat-card">
+<h2>24/7</h2>
+<p>Support</p>
+</div>
 
-  function disableAllButtons(form) {
-    var buttons = form.querySelectorAll("button");
-    for (var i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-  }
-})();
+</div>
 
+<section class="search-section">
 
-  </script>
-</center>
+<div class="search-box">
+
+<input type="text"
+id="searchInput"
+placeholder="🔍 Search Jobs">
+
+<select id="locationFilter">
+
+<option value="">📍 All Locations</option>
+
+<option>Hyderabad</option>
+<option>KPHB</option>
+<option>Miyapur</option>
+<option>Balanagar</option>
+<option>Uppal</option>
+
+</select>
+
+<select id="categoryFilter">
+
+<option value="">💼 Category</option>
+
+<option>BPO</option>
+<option>HR</option>
+<option>IT</option>
+<option>Admin</option>
+<option>Warehouse</option>
+
+</select>
+
+</div>
+
+</section>
+
+<section class="jobs-section">
+
+<h2 class="section-title">
+🔥 Latest Jobs
+</h2>
+
+<div class="jobs-grid"
+id="jobsGrid">
+
+Loading Jobs...
+
+</div>
+
+</section>
+
+<!-- JOB DETAILS -->
+
+<div class="popup"
+id="jobPage">
+
+<div class="popup-content">
+
+<span class="close-btn"
+onclick="closeJobPage()">
+
+×
+
+</span>
+
+<h2 id="jobPageTitle"></h2>
+
+<div class="job-info"
+id="jobCompany"></div>
+
+<div class="job-info"
+id="jobSalary"></div>
+
+<div class="job-info"
+id="jobLocationText"></div>
+
+<div class="job-info">
+
+<h3 style="margin-bottom:10px;">
+Job Description
+</h3>
+
+<p id="jobDescription"></p>
+
+</div>
+
+<div class="action-buttons">
+
+<button class="apply-btn"
+style="margin-top:0;"
+onclick="openApplyForm()">
+
+Apply Now
+
+</button>
+
+<a id="shareWhatsapp"
+target="_blank"
+class="share-btn">
+
+Share WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- APPLY FORM -->
+
+<div class="popup"
+id="popup">
+
+<div class="popup-content">
+
+<span class="close-btn"
+onclick="closePopup()">
+
+×
+
+</span>
+
+<h2>Apply Job 🚀</h2>
+
+<form id="jobForm">
+
+<div class="input-box">
+<label>Company</label>
+<input type="text" id="companyName" name="company" readonly>
+</div>
+
+<div class="input-box">
+<label>Job Role</label>
+<input type="text" id="jobRole" name="job_role" readonly>
+</div>
+
+<div class="input-box">
+<label>Location</label>
+<input type="text" id="jobLocation" name="location" readonly>
+</div>
+
+<div class="input-box">
+<label>Full Name</label>
+<input type="text" name="name" required>
+</div>
+
+<div class="input-box">
+<label>Phone</label>
+<input type="text" name="phone" required>
+</div>
+
+<div class="input-box">
+<label>Email</label>
+<input type="email" name="email">
+</div>
+
+<div class="input-box">
+<label>Date of Birth</label>
+<input type="date" name="dob" required>
+</div>
+
+<div class="input-box">
+<label>Gender</label>
+
+<select name="gender" required>
+
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+
+</select>
+
+</div>
+
+<div class="input-box">
+<label>Qualification</label>
+
+<select name="qualification">
+
+<option>10th</option>
+<option>Inter</option>
+<option>Degree</option>
+<option>BTech</option>
+
+</select>
+
+</div>
+
+<div class="input-box">
+<label>Experience</label>
+
+<select name="experience">
+
+<option>Fresher</option>
+<option>1 Year</option>
+<option>2 Years</option>
+
+</select>
+
+</div>
+
+<div class="input-box">
+<label>Address</label>
+<textarea name="address"></textarea>
+</div>
+
+<button type="submit"
+class="submit-btn"
+id="submitBtn">
+
+Submit Application
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+<h2>📞 Contact : 6305232525</h2>
+
+<p>VenuHR.com | Hyderabad</p>
+
+</div>
+
+<a href="https://wa.me/916305232525"
+class="whatsapp-btn">
+
+WhatsApp
+
+</a>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyARjD6pxfDGkQQSWGZ-T3bOZiu4qa_SJkk",
+
+authDomain: "vsr--staffing.firebaseapp.com",
+
+projectId: "vsr--staffing",
+
+storageBucket: "vsr--staffing.firebasestorage.app",
+
+messagingSenderId: "105296080631",
+
+appId: "1:105296080631:web:29a610f720cfa60032edf2"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const jobsGrid =
+document.getElementById("jobsGrid");
+
+const totalJobs =
+document.getElementById("totalJobs");
+
+let allJobs = [];
+
+async function loadJobs(){
+
+jobsGrid.innerHTML =
+"Loading Jobs...";
+
+try{
+
+const querySnapshot =
+await getDocs(collection(db,"venu"));
+
+allJobs = [];
+
+querySnapshot.forEach((doc)=>{
+
+allJobs.push(doc.data());
+
+});
+
+totalJobs.innerText =
+allJobs.length;
+
+displayJobs(allJobs);
+
+}catch(error){
+
+console.log(error);
+
+jobsGrid.innerHTML =
+"<div class='no-job'>Error Loading Jobs</div>";
+
+}
+
+}
+
+function displayJobs(jobs){
+
+jobsGrid.innerHTML = "";
+
+if(jobs.length === 0){
+
+jobsGrid.innerHTML =
+"<div class='no-job'>No Jobs Found</div>";
+
+return;
+
+}
+
+jobs.forEach((job)=>{
+
+jobsGrid.innerHTML += `
+
+<div class="job-card">
+
+<div class="company">
+${job.company || "Company Hiring"}
+</div>
+
+<div class="job-title">
+${job.Title || job.title || "Job"}
+</div>
+
+<div class="job-info">
+💰 Salary : ₹${job.salary || "15000"}
+</div>
+
+<div class="job-info">
+📍 Location : ${job.Location || job.location || "Hyderabad"}
+</div>
+
+<div class="job-info">
+💼 Category : ${job.category || "BPO"}
+</div>
+
+<div class="tags">
+
+<div class="tag">
+Urgent Hiring
+</div>
+
+<div class="tag">
+Apply Fast
+</div>
+
+<div class="tag">
+Full Time
+</div>
+
+</div>
+
+<button class="apply-btn"
+onclick='openJobPage(
+${JSON.stringify(job.company || "")},
+${JSON.stringify(job.Title || job.title || "")},
+${JSON.stringify(job.Location || job.location || "")},
+${JSON.stringify(job.salary || "")},
+${JSON.stringify(job.description || job.Description || "No Description Available")}
+)'>
+
+View Details
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+const searchInput =
+document.getElementById("searchInput");
+
+const locationFilter =
+document.getElementById("locationFilter");
+
+const categoryFilter =
+document.getElementById("categoryFilter");
+
+function filterJobs(){
+
+const searchValue =
+searchInput.value.toLowerCase();
+
+const locationValue =
+locationFilter.value.toLowerCase();
+
+const categoryValue =
+categoryFilter.value.toLowerCase();
+
+const filteredJobs =
+allJobs.filter((job)=>{
+
+const title =
+(job.Title || job.title || "")
+.toLowerCase();
+
+const location =
+(job.Location || job.location || "")
+.toLowerCase();
+
+const category =
+(job.category || "")
+.toLowerCase();
+
+return(
+
+title.includes(searchValue)
+
+&&
+
+(locationValue === "" ||
+location.includes(locationValue))
+
+&&
+
+(categoryValue === "" ||
+category.includes(categoryValue))
+
+);
+
+});
+
+displayJobs(filteredJobs);
+
+}
+
+searchInput.addEventListener("keyup",filterJobs);
+
+locationFilter.addEventListener("change",filterJobs);
+
+categoryFilter.addEventListener("change",filterJobs);
+
+window.openJobPage = function(company,job,location,salary,description){
+
+document.getElementById("jobPage").style.display="flex";
+
+document.getElementById("jobPageTitle").innerText = job;
+
+document.getElementById("jobCompany").innerHTML =
+"🏢 Company : " + company;
+
+document.getElementById("jobSalary").innerHTML =
+"💰 Salary : ₹" + salary;
+
+document.getElementById("jobLocationText").innerHTML =
+"📍 Location : " + location;
+
+document.getElementById("jobDescription").innerText =
+description || "No Description Available";
+
+document.getElementById("companyName").value = company;
+
+document.getElementById("jobRole").value = job;
+
+document.getElementById("jobLocation").value = location;
+
+const whatsappText =
+`*${job}*%0ACompany: ${company}%0ALocation: ${location}%0ASalary: ₹${salary}`;
+
+document.getElementById("shareWhatsapp").href =
+`https://wa.me/?text=${whatsappText}`;
+
+}
+
+window.closeJobPage = function(){
+
+document.getElementById("jobPage").style.display="none";
+
+}
+
+window.openApplyForm = function(){
+
+document.getElementById("jobPage").style.display="none";
+
+document.getElementById("popup").style.display="flex";
+
+}
+
+window.closePopup = function(){
+
+document.getElementById("popup").style.display="none";
+
+}
+
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbyAsqafWijN2RUII-Cz1dcGx5O2HC_La2HvEVy1PNxT-p7GPdjMKVFdK7lPNDDI4TGG/exec";
+
+const form =
+document.getElementById("jobForm");
+
+const submitBtn =
+document.getElementById("submitBtn");
+
+let isSubmitting = false;
+
+form.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+if(isSubmitting) return;
+
+isSubmitting = true;
+
+submitBtn.disabled = true;
+
+submitBtn.innerText = "Submitting...";
+
+try{
+
+await fetch(scriptURL,{
+
+method:"POST",
+
+body:new FormData(form)
+
+});
+
+alert("Application Submitted Successfully ✅");
+
+form.reset();
+
+closePopup();
+
+}catch(error){
+
+alert("Error Submitting Form ❌");
+
+}
+
+submitBtn.disabled = false;
+
+submitBtn.innerText = "Submit Application";
+
+isSubmitting = false;
+
+});
+
+loadJobs();
+
+</script>
+
 </body>
 </html>
