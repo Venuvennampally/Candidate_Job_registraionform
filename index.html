@@ -226,7 +226,10 @@ function renderApps(){
 </td>
 <td><button onclick="viewProfile('${a.id}')">Profile</button></td>
 <td><button onclick="addNote('${a.id}')">Notes</button></td>
- <td><button onclick="sendCompany('${a.jobRole||""}','${a.name||""}','${a.phone||""}')">Send</button></td>
+ <td>
+<button onclick="sendCompany('${a.jobRole||""}','${a.name||""}','${a.phone||""}')">Send</button>
+<button onclick="notifyCandidate('${a.name||""}','${a.phone||""}','${a.jobRole||""}')">Notify</button>
+</td>
  <td><button onclick="deleteCandidate('${a.id}')">Delete</button></td>
  </tr>`;
  });
@@ -381,6 +384,20 @@ selectedOnlyBtn.onclick=()=>{
 };
 
 refreshBtn.onclick=()=>load();
+
+
+window.notifyCandidate=(name,phone,job)=>{
+ const msg=`Dear ${name},
+
+Your profile has been shared for ${job}.
+
+Please keep your phone reachable.
+
+Regards,
+VenuHR`;
+
+ window.open(`https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`,'_blank');
+};
 
 searchCandidate.onkeyup=renderApps;
 statusFilter.onchange=renderApps;
