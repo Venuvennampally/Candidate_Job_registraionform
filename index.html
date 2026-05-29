@@ -19,6 +19,14 @@ th{background:#e8eefc}
 th,td{padding:10px;border:1px solid #e5e7eb}
 input,select,button,textarea{padding:10px;border-radius:8px}
 h1{margin-top:0}
+
+@media(max-width:768px){
+.sidebar{position:relative;width:100%;height:auto}
+.main{margin-left:0;padding:10px}
+.grid{grid-template-columns:1fr}
+table{display:block;overflow-x:auto;white-space:nowrap}
+input,select,textarea,button{width:100%;margin:4px 0;box-sizing:border-box}
+}
 </style>
 
 </head>
@@ -241,7 +249,25 @@ window.deleteCandidate=async(id)=>{
 window.sendCompany=(job,name,phone)=>{
  const j=jobs.find(x=>(x.Title||"")===job);
  const wa=j?.companyWhatsapp || "";
- const msg=`Candidate Details\nName: ${name}\nPhone: ${phone}\nJob: ${job}`;
+ const a=apps.find(x=>(x.name||'')===name && (x.phone||'')===phone);
+const msg=`Dear HR Team,
+
+Greetings from VenuHR.
+
+We have a suitable candidate for ${job}.
+
+👤 Name: ${a?.name||''}
+📞 Mobile: ${a?.phone||''}
+🎓 Qualification: ${a?.qualification||''}
+💼 Experience: ${a?.experience||''}
+📍 Address: ${a?.address||''}
+📧 Email: ${a?.email||''}
+
+Kindly review the profile and share your feedback.
+
+Regards,
+VenuHR
+6305232525`;
  window.open(wa?`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`:`https://wa.me/?text=${encodeURIComponent(msg)}`);
 };
 
@@ -430,48 +456,26 @@ load();
 
 <style>
 #loginPage{position:fixed;inset:0;background:#0f172a;display:flex;align-items:center;justify-content:center;z-index:999999}
-.login-box{background:#fff;padding:30px;border-radius:16px;width:340px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-.login-box h2{text-align:center;margin-bottom:15px}
-.login-box input{width:100%;padding:12px;margin:8px 0}
-.login-box button{width:100%;padding:12px}
-.logout-btn{position:fixed;top:10px;right:10px;z-index:10000}
+.login-box{background:#fff;padding:25px;border-radius:12px;width:320px}
+.login-box input{width:100%;padding:10px;margin:6px 0}
 </style>
-
-<button class="logout-btn" onclick="logoutAdmin()">Logout</button>
-
 <div id="loginPage">
- <div class="login-box">
-  <h2>VenuHR Admin Login</h2>
-  <input id="loginUser" placeholder="Username">
-  <input id="loginPass" type="password" placeholder="Password">
-  <button onclick="loginAdmin()">Login</button>
- </div>
-</div>
-
+<div class="login-box">
+<h2>VenuHR Login</h2>
+<input id="u" placeholder="Username">
+<input id="p" type="password" placeholder="Password">
+<button onclick="lg()">Login</button>
+</div></div>
 <script>
-function loginAdmin(){
- const u=document.getElementById('loginUser').value;
- const p=document.getElementById('loginPass').value;
-
- if(u==='admin' && p==='venuhr@9550'){
-   sessionStorage.setItem('venuhr_login','yes');
-   document.getElementById('loginPage').style.display='none';
- }else{
-   alert('Invalid Username or Password');
- }
+function lg(){
+if(u.value==='admin' && p.value==='venuhr@9550'){
+sessionStorage.setItem('ok','1');
+loginPage.style.display='none';
+}else alert('Invalid Login');
 }
-
-function logoutAdmin(){
- sessionStorage.removeItem('venuhr_login');
- location.reload();
-}
-
 window.addEventListener('load',()=>{
- if(sessionStorage.getItem('venuhr_login')==='yes'){
-   document.getElementById('loginPage').style.display='none';
- }
+if(sessionStorage.getItem('ok')==='1') loginPage.style.display='none';
 });
 </script>
-
 </body>
 </html>
