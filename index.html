@@ -1,950 +1,476 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VenuHR.com</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VenuHR Admin V14 Professional CRM</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#f4f7ff;
-overflow-x:hidden;
-color:#111827;
-}
-
-.header{
-background:
-linear-gradient(rgba(0,32,96,0.88),rgba(0,15,60,0.88)),
-url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1400&auto=format&fit=crop');
-
-background-size:cover;
-background-position:center;
-padding:90px 20px;
-text-align:center;
-color:white;
-}
-
-.header h1{
-font-size:58px;
-font-weight:800;
-}
-
-.header p{
-font-size:22px;
-margin-top:10px;
-}
-
-.top-stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-padding:30px 20px;
-max-width:1300px;
-margin:auto;
-margin-top:-50px;
-}
-
-.stat-card{
-background:white;
-padding:28px;
-border-radius:22px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-text-align:center;
-}
-
-.stat-card h2{
-font-size:38px;
-color:#2563eb;
-margin-bottom:10px;
-}
-
-.search-section{
-padding:10px 20px 30px;
-}
-
-.search-box{
-max-width:1300px;
-margin:auto;
-background:white;
-padding:25px;
-border-radius:25px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-}
-
-.search-box input,
-.search-box select{
-padding:16px;
-border:none;
-outline:none;
-background:#eef3ff;
-border-radius:14px;
-font-size:15px;
-}
-
-.jobs-section{
-padding:20px;
-max-width:1400px;
-margin:auto;
-}
-
-.section-title{
-font-size:34px;
-font-weight:800;
-margin-bottom:25px;
-}
-
-.jobs-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-}
-
-.job-card{
-background:white;
-padding:28px;
-border-radius:25px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-transition:0.3s;
-position:relative;
-overflow:hidden;
-}
-
-.job-card:hover{
-transform:translateY(-8px);
-}
-
-.job-card::before{
-content:'';
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:7px;
-background:linear-gradient(90deg,#2563eb,#06b6d4);
-}
-
-.company{
-font-size:14px;
-font-weight:700;
-color:#2563eb;
-margin-bottom:15px;
-}
-
-.job-title{
-font-size:30px;
-font-weight:800;
-margin-bottom:18px;
-}
-
-.job-info{
-font-size:16px;
-margin-bottom:12px;
-color:#4b5563;
-}
-
-.tags{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-top:20px;
-}
-
-.tag{
-padding:8px 14px;
-background:#dbeafe;
-color:#2563eb;
-font-size:13px;
-font-weight:700;
-border-radius:50px;
-}
-
-.apply-btn{
-width:100%;
-margin-top:24px;
-padding:16px;
-border:none;
-border-radius:16px;
-background:linear-gradient(135deg,#2563eb,#1d4ed8);
-color:white;
-font-size:18px;
-font-weight:700;
-cursor:pointer;
-transition:0.3s;
-}
-
-.apply-btn:hover{
-transform:scale(1.02);
-}
-
-.popup{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-display:none;
-justify-content:center;
-align-items:flex-start;
-overflow-y:auto;
-padding:40px 15px;
-z-index:9999;
-}
-
-.popup-content{
-width:100%;
-max-width:550px;
-background:white;
-padding:30px;
-border-radius:25px;
-position:relative;
-}
-
-.close-btn{
-position:absolute;
-right:18px;
-top:10px;
-font-size:35px;
-cursor:pointer;
-}
-
-.popup h2{
-text-align:center;
-margin-bottom:25px;
-color:#2563eb;
-}
-
-.input-box{
-margin-bottom:18px;
-}
-
-.input-box label{
-display:block;
-margin-bottom:8px;
-font-weight:600;
-}
-
-.input-box input,
-.input-box select,
-.input-box textarea{
-width:100%;
-padding:15px;
-border:none;
-outline:none;
-border-radius:14px;
-background:#f3f6ff;
-font-size:15px;
-}
-
-textarea{
-resize:none;
-height:90px;
-}
-
-.submit-btn{
-width:100%;
-padding:16px;
-border:none;
-border-radius:14px;
-background:#16a34a;
-color:white;
-font-size:18px;
-font-weight:700;
-cursor:pointer;
-}
-
-.no-job{
-text-align:center;
-padding:50px;
-font-size:24px;
-font-weight:700;
-}
-
-.footer{
-background:#071b63;
-margin-top:60px;
-padding:40px 20px;
-text-align:center;
-color:white;
-}
-
-.whatsapp-btn{
-position:fixed;
-right:20px;
-bottom:20px;
-background:#22c55e;
-color:white;
-padding:16px 24px;
-border-radius:50px;
-text-decoration:none;
-font-weight:700;
-z-index:999;
-}
-
-.action-buttons{
-display:flex;
-gap:15px;
-margin-top:25px;
-}
-
-.share-btn{
-flex:1;
-background:#22c55e;
-padding:16px;
-border-radius:16px;
-text-align:center;
-color:white;
-text-decoration:none;
-font-weight:700;
-}
-
-@media(max-width:900px){
-
-.search-box{
-grid-template-columns:1fr 1fr;
-}
-
-.header h1{
-font-size:40px;
-}
-
-}
-
-@media(max-width:600px){
-
-.search-box{
-grid-template-columns:1fr;
-}
-
-.header h1{
-font-size:34px;
-}
-
-.header p{
-font-size:16px;
-}
-
-.job-title{
-font-size:24px;
-}
-
-.action-buttons{
-flex-direction:column;
-}
-
-}
-
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f4f7fb}
+.sidebar{position:fixed;left:0;top:0;width:240px;height:100vh;background:#0f172a;color:#fff;padding:18px;overflow:auto}
+.sidebar h2{margin-bottom:20px}
+.sidebar button{width:100%;padding:12px;margin:6px 0;border:none;border-radius:10px;background:#1e293b;color:#fff;cursor:pointer;text-align:left}
+.sidebar button:hover{background:#334155}
+.main{margin-left:260px;padding:24px}
+.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+table{width:100%;border-collapse:collapse;background:#fff}
+th{background:#e8eefc}
+th,td{padding:10px;border:1px solid #e5e7eb}
+input,select,button,textarea{padding:10px;border-radius:8px}
+h1{margin-top:0}
 </style>
 
 </head>
-
 <body>
 
-<div class="header">
+<div class="sidebar">
+<h2>VenuHR CRM</h2>
+<button onclick="showPage('dashboardPage')">📊 Dashboard</button>
+<button onclick="showPage('jobsPage')">💼 Jobs</button>
+<button onclick="showPage('candidatesPage')">👥 Candidates</button>
+<button onclick="showPage('followupsPage')">📅 Follow-ups</button>
+<button onclick="showPage('reportsPage')">📈 Reports</button>
+<button onclick="showPage('settingsPage')">⚙️ Settings</button>
+</div>
+<script>
+function showPage(id){
+ document.querySelectorAll('.crm-page').forEach(x=>x.style.display='none');
+ const el=document.getElementById(id);
+ if(el) el.style.display='block';
+}
+</script>
+<div class="main">
 
-<h1>Venuhr.com</h1>
+<div id="dashboardPage" class="crm-page"><h1>🚀 VenuHR CRM Dashboard</h1>
 
-<p>Find Latest Jobs in Hyderabad 🚀</p>
-
+<div class="grid">
+<div class="card"><h2 id="apps">0</h2><p>Applications</p></div>
+<div class="card"><h2 id="jobsCount">0</h2><p>Jobs</p></div>
+<div class="card"><h2 id="selected">0</h2><p>Selected</p></div>
+<div class="card"><h2 id="rejected">0</h2><p>Rejected</p></div>
+<div class="card"><h2 id="todayFollowups">0</h2><p>Today's Follow-ups</p></div>
+<div class="card"><h2 id="overdueFollowups">0</h2><p>Overdue Follow-ups</p></div>
 </div>
 
-<div class="top-stats">
-
-<div class="stat-card">
-<h2 id="totalJobs">0</h2>
-<p>Total Jobs</p>
-</div>
-
-<div class="stat-card">
-<h2>50+</h2>
-<p>Companies</p>
-</div>
-
-<div class="stat-card">
-<h2>1000+</h2>
-<p>Candidates</p>
-</div>
-
-<div class="stat-card">
-<h2>24/7</h2>
-<p>Support</p>
-</div>
-
-</div>
-
-<section class="search-section">
-
-<div class="search-box">
-
-<input type="text"
-id="searchInput"
-placeholder="🔍 Search Jobs">
-
-<select id="locationFilter">
-
-<option value="">📍 All Locations</option>
-
-<option>Hyderabad</option>
-<option>KPHB</option>
-<option>Miyapur</option>
-<option>Balanagar</option>
-<option>Uppal</option>
-
+<div class="card">
+<input id="searchCandidate" placeholder="Search Candidate">
+<select id="statusFilter">
+<option value="">All Status</option>
+<option>New</option>
+<option>Selected</option>
+<option>Rejected</option>
+<option>Interview Scheduled</option>
 </select>
+<button id="csvBtn">Export CSV</button><button id="selectedOnlyBtn">Selected Report</button><button id="refreshBtn">Refresh</button>
+</div>
 
-<select id="categoryFilter">
-
-<option value="">💼 Category</option>
-
-<option>BPO</option>
+</div><div id="jobsPage" class="crm-page" style="display:none"><div class="card">
+<h3>Add Job</h3>
+<input id="title" placeholder="Title">
+<input id="company" placeholder="Company">
+<input id="location" placeholder="Location">
+<select id="category">
+<option value="">Select Category</option>
 <option>HR</option>
 <option>IT</option>
+<option>BPO</option>
 <option>Admin</option>
 <option>Warehouse</option>
-
+<option>Accounts</option>
+<option>Customer Support</option>
+<option>Sales</option>
+<option>Recruitment</option>
 </select>
-
+<input id="salary" placeholder="Salary">
+<input id="whatsapp" placeholder="Company WhatsApp">
+<textarea id="description" placeholder="Description"></textarea>
+<button id="addBtn">Add Job</button>
 </div>
 
-</section>
-
-<section class="jobs-section">
-
-<h2 class="section-title">
-🔥 Latest Jobs
-</h2>
-
-<div class="jobs-grid"
-id="jobsGrid">
-
-Loading Jobs...
-
-</div>
-
-</section>
-
-<!-- JOB DETAILS -->
-
-<div class="popup"
-id="jobPage">
-
-<div class="popup-content">
-
-<span class="close-btn"
-onclick="closeJobPage()">
-
-×
-
-</span>
-
-<h2 id="jobPageTitle"></h2>
-
-<div class="job-info"
-id="jobCompany"></div>
-
-<div class="job-info"
-id="jobSalary"></div>
-
-<div class="job-info"
-id="jobLocationText"></div>
-
-<div class="job-info">
-
-<h3 style="margin-bottom:10px;">
-Job Description
-</h3>
-
-<p id="jobDescription"></p>
-
-</div>
-
-<div class="action-buttons">
-
-<button class="apply-btn"
-style="margin-top:0;"
-onclick="openApplyForm()">
-
-Apply Now
-
-</button>
-
-<a id="shareWhatsapp"
-target="_blank"
-class="share-btn">
-
-Share WhatsApp
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- APPLY FORM -->
-
-<div class="popup"
-id="popup">
-
-<div class="popup-content">
-
-<span class="close-btn"
-onclick="closePopup()">
-
-×
-
-</span>
-
-<h2>Apply Job 🚀</h2>
-
-<form id="jobForm">
-
-<div class="input-box">
-<label>Company</label>
-<input type="text" id="companyName" name="company" readonly>
-</div>
-
-<div class="input-box">
-<label>Job Role</label>
-<input type="text" id="jobRole" name="job_role" readonly>
-</div>
-
-<div class="input-box">
-<label>Location</label>
-<input type="text" id="jobLocation" name="location" readonly>
-</div>
-
-<div class="input-box">
-<label>Full Name</label>
-<input type="text" name="name" required>
-</div>
-
-<div class="input-box">
-<label>Phone</label>
-<input type="text" name="phone" required>
-</div>
-
-<div class="input-box">
-<label>Email</label>
-<input type="email" name="email">
-</div>
-
-<div class="input-box">
-<label>Date of Birth</label>
-<input type="date" name="dob" required>
-</div>
-
-<div class="input-box">
-<label>Gender</label>
-
-<select name="gender" required>
-
-<option value="">Select Gender</option>
-<option>Male</option>
-<option>Female</option>
-
+<div class="card" id="editBox" style="display:none">
+<h3>Edit Job</h3>
+<input id="eTitle"><input id="eCompany"><input id="eLocation">
+<input id="eSalary">
+<select id="eCategory">
+<option>HR</option>
+<option>IT</option>
+<option>BPO</option>
+<option>Admin</option>
+<option>Warehouse</option>
+<option>Accounts</option>
+<option>Customer Support</option>
+<option>Sales</option>
+<option>Recruitment</option>
 </select>
-
+<input id="eWhatsapp">
+<textarea id="eDescription"></textarea>
+<button id="saveEdit">Save Job</button>
 </div>
 
-<div class="input-box">
-<label>Qualification</label>
-
-<select name="qualification">
-
-<option>10th</option>
-<option>Inter</option>
-<option>Degree</option>
-<option>BTech</option>
-
-</select>
-
+<div class="card">
+<h3>Jobs</h3>
+<table><thead><tr><th>Title</th><th>Company</th><th>Edit</th><th>Delete</th></tr></thead>
+<tbody id="jobsTable"></tbody></table>
 </div>
 
-<div class="input-box">
-<label>Experience</label>
 
-<select name="experience">
-
-<option>Fresher</option>
-<option>1 Year</option>
-<option>2 Years</option>
-
-</select>
-
+<div class="card">
+<h3>ATS Tools</h3>
+<input id="recruiterFilter" placeholder="Filter Recruiter">
+<p>New ATS Features: Candidate Profile Popup, Recruiter Assignment, Notes support.</p>
 </div>
 
-<div class="input-box">
-<label>Address</label>
-<textarea name="address"></textarea>
+
+
+</div><div id="candidatesPage" class="crm-page" style="display:none"><div class="card">
+<h3>Candidates</h3>
+<table><thead><tr>
+<th>Name</th><th>Phone</th><th>Job</th><th>Status</th><th>Follow-up</th><th>Recruiter</th><th>Profile</th><th>Notes</th><th>Send</th><th>Delete</th>
+</tr></thead>
+<tbody id="appsTable"></tbody></table>
 </div>
-
-<button type="submit"
-class="submit-btn"
-id="submitBtn">
-
-Submit Application
-
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-<div class="footer">
-
-<h2>📞 Contact : 6305232525</h2>
-
-<p>VenuHR.com | Hyderabad</p>
-
-</div>
-
-<a href="https://wa.me/916305232525"
-class="whatsapp-btn">
-
-WhatsApp
-
-</a>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore,collection,getDocs,addDoc,updateDoc,deleteDoc,doc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-import {
-getFirestore,
-collection,
-getDocs
-}
-from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyARjD6pxfDGkQQSWGZ-T3bOZiu4qa_SJkk",
-
-authDomain: "vsr--staffing.firebaseapp.com",
-
-projectId: "vsr--staffing",
-
-storageBucket: "vsr--staffing.firebasestorage.app",
-
-messagingSenderId: "105296080631",
-
-appId: "1:105296080631:web:29a610f720cfa60032edf2"
-
+const firebaseConfig={
+apiKey:"AIzaSyARjD6pxfDGkQQSWGZ-T3bOZiu4qa_SJkk",
+authDomain:"vsr--staffing.firebaseapp.com",
+projectId:"vsr--staffing",
+storageBucket:"vsr--staffing.firebasestorage.app",
+messagingSenderId:"105296080631",
+appId:"1:105296080631:web:29a610f720cfa60032edf2"
 };
 
-const app = initializeApp(firebaseConfig);
+const db=getFirestore(initializeApp(firebaseConfig));
+let jobs=[],apps=[],editId=null;
 
-const db = getFirestore(app);
+async function load(){
+ jobs=[]; apps=[];
+ const j=await getDocs(collection(db,"venu"));
+ const a=await getDocs(collection(db,"applications"));
 
-const jobsGrid =
-document.getElementById("jobsGrid");
+ let sel=0,rej=0;
+ j.forEach(d=>jobs.push({id:d.id,...d.data()}));
+ a.forEach(d=>{
+   const x={id:d.id,...d.data()};
+   apps.push(x);
+   if(x.status==="Selected") sel++;
+   if(x.status==="Rejected") rej++;
+ });
 
-const totalJobs =
-document.getElementById("totalJobs");
+ apps.textContent;
+ document.getElementById("apps").textContent=apps.length;
+ document.getElementById("jobsCount").textContent=jobs.length;
+ document.getElementById("selected").textContent=sel;
+ document.getElementById("rejected").textContent=rej;
 
-let allJobs = [];
+ renderJobs();
+ renderApps();
+}
 
-async function loadJobs(){
+function renderJobs(){
+ const tb=document.getElementById("jobsTable");
+ tb.innerHTML="";
+ jobs.forEach(j=>{
+ tb.innerHTML += `<tr>
+ <td>${j.Title||""}</td>
+ <td>${j.company||""}</td>
+ <td><button onclick="editJob('${j.id}')">Edit</button></td>
+ <td><button onclick="deleteJob('${j.id}')">Delete</button></td>
+ </tr>`;
+ });
+}
 
-jobsGrid.innerHTML =
-"Loading Jobs...";
+function renderApps(){
+ const q=document.getElementById("searchCandidate").value.toLowerCase();
+ const f=document.getElementById("statusFilter").value;
+ const tb=document.getElementById("appsTable");
+ tb.innerHTML="";
 
-try{
+ apps.filter(a=>{
+   const m=(a.name||"").toLowerCase().includes(q) || (a.phone||"").includes(q);
+   const s=!f || (a.status||"New")===f;
+   return m && s;
+ }).forEach(a=>{
+ tb.innerHTML += `<tr>
+ <td>${a.name||""}</td>
+ <td>${a.phone||""}</td>
+ <td>${a.jobRole||""}</td>
+ <td>
+ <select onchange="changeStatus('${a.id}',this.value)">
+ <option ${a.status==="New"?"selected":""}>New</option>
+ <option ${a.status==="Selected"?"selected":""}>Selected</option>
+ <option ${a.status==="Rejected"?"selected":""}>Rejected</option>
+ <option ${a.status==="Interview Scheduled"?"selected":""}>Interview Scheduled</option>
+ </select>
+ </td>
+ <td><button onclick="setFollowup('${a.id}')">Follow-up</button></td>
+<td>
+<select onchange="assignRecruiter('${a.id}',this.value)">
+<option>${a.recruiter||'Unassigned'}</option>
+<option>Venu</option>
+<option>Ravi</option>
+<option>Suresh</option>
+</select>
+</td>
+<td><button onclick="viewProfile('${a.id}')">Profile</button></td>
+<td><button onclick="addNote('${a.id}')">Notes</button></td>
+ <td><button onclick="sendCompany('${a.jobRole||""}','${a.name||""}','${a.phone||""}')">Send</button></td>
+ <td><button onclick="deleteCandidate('${a.id}')">Delete</button></td>
+ </tr>`;
+ });
+}
 
-const querySnapshot =
-await getDocs(collection(db,"venu"));
+window.changeStatus=async(id,s)=>await updateDoc(doc(db,"applications",id),{status:s});
 
-allJobs = [];
+window.addNote=async(id)=>{
+ const note=prompt("Candidate Note");
+ if(note) await updateDoc(doc(db,"applications",id),{note});
+};
 
-querySnapshot.forEach((doc)=>{
+window.deleteCandidate=async(id)=>{
+ if(confirm("Delete Candidate?")){
+  await deleteDoc(doc(db,"applications",id));
+  load();
+ }
+};
 
-allJobs.push(doc.data());
+window.sendCompany=(job,name,phone)=>{
+ const j=jobs.find(x=>(x.Title||"")===job);
+ const wa=j?.companyWhatsapp || "";
+ const msg=`Candidate Details\nName: ${name}\nPhone: ${phone}\nJob: ${job}`;
+ window.open(wa?`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`:`https://wa.me/?text=${encodeURIComponent(msg)}`);
+};
 
+window.editJob=(id)=>{
+ const j=jobs.find(x=>x.id===id);
+ editId=id;
+ document.getElementById("editBox").style.display="block";
+ eTitle.value=j.Title||""; eCompany.value=j.company||"";
+ eLocation.value=j.Location||""; eSalary.value=j.salary||""; eCategory.value=j.category||"";
+ eWhatsapp.value=j.companyWhatsapp||""; eDescription.value=j.description||"";
+};
+
+saveEdit.onclick=async()=>{
+ await updateDoc(doc(db,"venu",editId),{
+  Title:eTitle.value, company:eCompany.value, Location:eLocation.value,
+  salary:eSalary.value, category:eCategory.value, companyWhatsapp:eWhatsapp.value, description:eDescription.value
+ });
+ alert("Updated");
+ load();
+};
+
+window.deleteJob=async(id)=>{
+ if(confirm("Delete Job?")){
+  await deleteDoc(doc(db,"venu",id));
+  load();
+ }
+};
+
+addBtn.onclick=async()=>{
+ await addDoc(collection(db,"venu"),{
+  Title:title.value, company:company.value, Location:location.value,
+  salary:salary.value, category:category.value, companyWhatsapp:whatsapp.value, description:description.value
+ });
+ alert("Job Added");
+ load();
+};
+
+document.getElementById('csvBtn').onclick=()=>{
+ let csv="Name,Phone,Email,DOB,Gender,Qualification,Experience,Address,Job Role,Status,Recruiter,Notes\n";
+ apps.forEach(a=>{
+   csv += [
+    a.name||'',a.phone||'',a.email||'',a.dob||'',a.gender||'',
+    a.qualification||'',a.experience||'',a.address||'',
+    a.jobRole||'',a.status||'',a.recruiter||'',a.note||''
+   ].map(v => '"'+String(v).replaceAll('"','""')+'"').join(',') + "\n";
+ });
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+ const link=document.createElement('a');
+ link.href=URL.createObjectURL(blob);
+ link.download='venuhr_full_export.csv';
+ document.body.appendChild(link);
+ link.click();
+ link.remove();
+};
+
+
+window.assignRecruiter=async(id,val)=>{
+ await updateDoc(doc(db,"applications",id),{recruiter:val});
+};
+
+window.viewProfile=(id)=>{
+ const a=apps.find(x=>x.id===id);
+ document.getElementById('profileModal').style.display='block';
+ document.getElementById('profileContent').innerHTML=`
+ <p><b>Name:</b> ${a.name||''}</p>
+ <p><b>Phone:</b> ${a.phone||''}</p>
+ <p><b>Email:</b> ${a.email||''}</p>
+ <p><b>Qualification:</b> ${a.qualification||''}</p>
+ <p><b>Experience:</b> ${a.experience||''}</p>
+ <p><b>Address:</b> ${a.address||''}</p>
+ <p><b>Job:</b> ${a.jobRole||''}</p>
+ <p><b>Status:</b> ${a.status||''}</p>
+ <p><b>Recruiter:</b> ${a.recruiter||''}</p>
+ <p><b>Notes:</b> ${a.note||''}</p>`;
+};
+
+
+window.setFollowup=async(id)=>{
+ const date=prompt("Follow-up Date (YYYY-MM-DD)");
+ const reminder=prompt("Next Call Reminder");
+ if(date){
+   await updateDoc(doc(db,"applications",id),{
+     followupDate:date,
+     nextCallReminder:reminder||""
+   });
+   alert("Follow-up Saved");
+ }
+};
+
+const oldLoad = load;
+load = async function(){
+ await oldLoad();
+ let today=0, overdue=0;
+ const now = new Date().toISOString().split('T')[0];
+ apps.forEach(a=>{
+   if(a.followupDate){
+      if(a.followupDate===now) today++;
+      if(a.followupDate < now) overdue++;
+   }
+ });
+ const t=document.getElementById('todayFollowups');
+ const o=document.getElementById('overdueFollowups');
+ if(t) t.textContent=today;
+ if(o) o.textContent=overdue;
+}
+
+
+selectedOnlyBtn.onclick=()=>{
+ const selectedApps=apps.filter(a=>a.status==='Selected');
+ alert('Selected Candidates: '+selectedApps.length);
+};
+
+refreshBtn.onclick=()=>load();
+
+searchCandidate.onkeyup=renderApps;
+statusFilter.onchange=renderApps;
+load();
+</script>
+
+</div><div id="followupsPage" class="crm-page" style="display:none"><div class="card">
+<h3>Candidate Timeline</h3>
+<p>Applied → HR Call → Interview → Selected/Rejected</p>
+</div>
+
+<div class="card">
+<h3>Job Status Management</h3>
+<select>
+<option>Active</option>
+<option>Closed</option>
+<option>Hold</option>
+</select>
+<p>Use jobStatus field in Firestore for filtering website jobs.</p>
+</div>
+
+
+</div><div id="reportsPage" class="crm-page" style="display:none"><div class="card">
+<h3>🏢 Companies Module</h3>
+<input placeholder="Company Name">
+<input placeholder="HR Name">
+<input placeholder="Mobile">
+<input placeholder="Email">
+<button>Add Company</button>
+</div>
+
+<div class="card">
+<h3>📅 Interview Scheduler</h3>
+<input type="date">
+<input type="time">
+<input placeholder="Interviewer">
+<input placeholder="Location / Meet Link">
+<select>
+<option>Scheduled</option>
+<option>Attended</option>
+<option>No Show</option>
+<option>Selected</option>
+<option>Rejected</option>
+</select>
+<button>Schedule Interview</button>
+</div>
+
+<div class="card">
+<h3>👥 Recruiter Dashboard</h3>
+<div class="grid">
+<div class="card"><h2>0</h2><p>Venu Assigned</p></div>
+<div class="card"><h2>0</h2><p>Ravi Assigned</p></div>
+<div class="card"><h2>0</h2><p>Suresh Assigned</p></div>
+</div>
+</div>
+
+<div class="card">
+<h3>💼 Job Status</h3>
+<select>
+<option>Active</option>
+<option>Closed</option>
+<option>Hold</option>
+</select>
+<p>Use jobStatus field in Firestore.</p>
+</div>
+<div id="settingsPage" class="crm-page" style="display:none"><div class="card"><h3>Settings</h3><p>CRM Settings</p></div></div></div>
+<div id="profileModal" style="display:none;position:fixed;top:5%;left:5%;width:90%;height:90%;background:#fff;overflow:auto;z-index:99999;border-radius:12px;padding:20px;box-shadow:0 0 20px rgba(0,0,0,.3);">
+<h2>Candidate Profile</h2>
+<div id="profileContent"></div>
+<button onclick="document.getElementById('profileModal').style.display='none'">Close</button>
+</div>
+
+
+<style>
+#loginPage{position:fixed;inset:0;background:#0f172a;display:flex;align-items:center;justify-content:center;z-index:999999}
+.login-box{background:#fff;padding:30px;border-radius:16px;width:340px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.login-box h2{text-align:center;margin-bottom:15px}
+.login-box input{width:100%;padding:12px;margin:8px 0}
+.login-box button{width:100%;padding:12px}
+.logout-btn{position:fixed;top:10px;right:10px;z-index:10000}
+</style>
+
+<button class="logout-btn" onclick="logoutAdmin()">Logout</button>
+
+<div id="loginPage">
+ <div class="login-box">
+  <h2>VenuHR Admin Login</h2>
+  <input id="loginUser" placeholder="Username">
+  <input id="loginPass" type="password" placeholder="Password">
+  <button onclick="loginAdmin()">Login</button>
+ </div>
+</div>
+
+<script>
+function loginAdmin(){
+ const u=document.getElementById('loginUser').value;
+ const p=document.getElementById('loginPass').value;
+
+ if(u==='admin' && p==='venuhr@9550'){
+   sessionStorage.setItem('venuhr_login','yes');
+   document.getElementById('loginPage').style.display='none';
+ }else{
+   alert('Invalid Username or Password');
+ }
+}
+
+function logoutAdmin(){
+ sessionStorage.removeItem('venuhr_login');
+ location.reload();
+}
+
+window.addEventListener('load',()=>{
+ if(sessionStorage.getItem('venuhr_login')==='yes'){
+   document.getElementById('loginPage').style.display='none';
+ }
 });
-
-totalJobs.innerText =
-allJobs.length;
-
-displayJobs(allJobs);
-
-}catch(error){
-
-console.log(error);
-
-jobsGrid.innerHTML =
-"<div class='no-job'>Error Loading Jobs</div>";
-
-}
-
-}
-
-function displayJobs(jobs){
-
-jobsGrid.innerHTML = "";
-
-if(jobs.length === 0){
-
-jobsGrid.innerHTML =
-"<div class='no-job'>No Jobs Found</div>";
-
-return;
-
-}
-
-jobs.forEach((job)=>{
-
-jobsGrid.innerHTML += `
-
-<div class="job-card">
-
-<div class="company">
-${job.company || "Company Hiring"}
-</div>
-
-<div class="job-title">
-${job.Title || job.title || "Job"}
-</div>
-
-<div class="job-info">
-💰 Salary : ₹${job.salary || "15000"}
-</div>
-
-<div class="job-info">
-📍 Location : ${job.Location || job.location || "Hyderabad"}
-</div>
-
-<div class="job-info">
-💼 Category : ${job.category || "BPO"}
-</div>
-
-<div class="tags">
-
-<div class="tag">
-Urgent Hiring
-</div>
-
-<div class="tag">
-Apply Fast
-</div>
-
-<div class="tag">
-Full Time
-</div>
-
-</div>
-
-<button class="apply-btn"
-onclick='openJobPage(
-${JSON.stringify(job.company || "")},
-${JSON.stringify(job.Title || job.title || "")},
-${JSON.stringify(job.Location || job.location || "")},
-${JSON.stringify(job.salary || "")},
-${JSON.stringify(job.description || job.Description || "No Description Available")}
-)'>
-
-View Details
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-const searchInput =
-document.getElementById("searchInput");
-
-const locationFilter =
-document.getElementById("locationFilter");
-
-const categoryFilter =
-document.getElementById("categoryFilter");
-
-function filterJobs(){
-
-const searchValue =
-searchInput.value.toLowerCase();
-
-const locationValue =
-locationFilter.value.toLowerCase();
-
-const categoryValue =
-categoryFilter.value.toLowerCase();
-
-const filteredJobs =
-allJobs.filter((job)=>{
-
-const title =
-(job.Title || job.title || "")
-.toLowerCase();
-
-const location =
-(job.Location || job.location || "")
-.toLowerCase();
-
-const category =
-(job.category || "")
-.toLowerCase();
-
-return(
-
-title.includes(searchValue)
-
-&&
-
-(locationValue === "" ||
-location.includes(locationValue))
-
-&&
-
-(categoryValue === "" ||
-category.includes(categoryValue))
-
-);
-
-});
-
-displayJobs(filteredJobs);
-
-}
-
-searchInput.addEventListener("keyup",filterJobs);
-
-locationFilter.addEventListener("change",filterJobs);
-
-categoryFilter.addEventListener("change",filterJobs);
-
-window.openJobPage = function(company,job,location,salary,description){
-
-document.getElementById("jobPage").style.display="flex";
-
-document.getElementById("jobPageTitle").innerText = job;
-
-document.getElementById("jobCompany").innerHTML =
-"🏢 Company : " + company;
-
-document.getElementById("jobSalary").innerHTML =
-"💰 Salary : ₹" + salary;
-
-document.getElementById("jobLocationText").innerHTML =
-"📍 Location : " + location;
-
-document.getElementById("jobDescription").innerText =
-description || "No Description Available";
-
-document.getElementById("companyName").value = company;
-
-document.getElementById("jobRole").value = job;
-
-document.getElementById("jobLocation").value = location;
-
-const whatsappText =
-`*${job}*%0ACompany: ${company}%0ALocation: ${location}%0ASalary: ₹${salary}`;
-
-document.getElementById("shareWhatsapp").href =
-`https://wa.me/?text=${whatsappText}`;
-
-}
-
-window.closeJobPage = function(){
-
-document.getElementById("jobPage").style.display="none";
-
-}
-
-window.openApplyForm = function(){
-
-document.getElementById("jobPage").style.display="none";
-
-document.getElementById("popup").style.display="flex";
-
-}
-
-window.closePopup = function(){
-
-document.getElementById("popup").style.display="none";
-
-}
-
-const scriptURL =
-"https://script.google.com/macros/s/AKfycbyAsqafWijN2RUII-Cz1dcGx5O2HC_La2HvEVy1PNxT-p7GPdjMKVFdK7lPNDDI4TGG/exec";
-
-const form =
-document.getElementById("jobForm");
-
-const submitBtn =
-document.getElementById("submitBtn");
-
-let isSubmitting = false;
-
-form.addEventListener("submit", async (e)=>{
-
-e.preventDefault();
-
-if(isSubmitting) return;
-
-isSubmitting = true;
-
-submitBtn.disabled = true;
-
-submitBtn.innerText = "Submitting...";
-
-try{
-
-await fetch(scriptURL,{
-
-method:"POST",
-
-body:new FormData(form)
-
-});
-
-alert("Application Submitted Successfully ✅");
-
-form.reset();
-
-closePopup();
-
-}catch(error){
-
-alert("Error Submitting Form ❌");
-
-}
-
-submitBtn.disabled = false;
-
-submitBtn.innerText = "Submit Application";
-
-isSubmitting = false;
-
-});
-
-loadJobs();
-
 </script>
 
 </body>
