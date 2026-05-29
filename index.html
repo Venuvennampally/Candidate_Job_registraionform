@@ -38,7 +38,7 @@ input,select,textarea,button{width:100%;margin:4px 0;box-sizing:border-box}
 <button onclick="showPage('jobsPage')">💼 Jobs</button>
 <button onclick="showPage('candidatesPage')">👥 Candidates</button>
 <button onclick="showPage('followupsPage')">📅 Follow-ups</button>
-<button onclick="showPage('reportsPage')">📈 Reports</button>
+<button onclick="showPage('bulkSharePage')">📤 Bulk Share</button><button onclick="showPage('reportsPage')">📈 Reports</button>
 <button onclick="showPage('settingsPage')">⚙️ Settings</button>
 </div>
 <script>
@@ -134,7 +134,7 @@ function showPage(id){
 </div><div id="candidatesPage" class="crm-page" style="display:none"><div class="card">
 <h3>Candidates</h3>
 <table><thead><tr>
-<th>Name</th><th>Phone</th><th>Job</th><th>Status</th><th>Follow-up</th><th>Recruiter</th><th>Profile</th><th>Notes</th><th>Send</th><th>Delete</th>
+<th>Name</th><th>Phone</th><th>Job</th><th>Status</th><th>Follow-up</th><th>Recruiter</th><th>Profile</th><th>Notes</th><th>Send</th><th>Resubmit</th><th>Delete</th>
 </tr></thead>
 <tbody id="appsTable"></tbody></table>
 </div>
@@ -230,7 +230,13 @@ function renderApps(){
 <button onclick="sendCompany('${a.jobRole||""}','${a.name||""}','${a.phone||""}')">Send</button>
 <button onclick="notifyCandidate('${a.name||""}','${a.phone||""}','${a.jobRole||""}')">Notify</button>
 </td>
- <td><button onclick="deleteCandidate('${a.id}')">Delete</button></td>
+ <td>
+<select onchange="resubmitCandidate('${a.name||""}','${a.phone||""}','${a.jobRole||""}',this.value)">
+<option value="">Select Company</option>
+${[...new Set(jobs.map(j=>j.company).filter(Boolean))].map(c=>`<option>${c}</option>`).join('')}
+</select>
+</td>
+<td><button onclick="deleteCandidate('${a.id}')">Delete</button></td>
  </tr>`;
  });
 }
@@ -299,13 +305,23 @@ window.deleteJob=async(id)=>{
  }
 };
 
-addBtn.onclick=async()=>{
- await addDoc(collection(db,"venu"),{
-  Title:title.value, company:company.value, Location:location.value,
-  salary:salary.value, category:category.value, companyWhatsapp:whatsapp.value, description:description.value
- });
- alert("Job Added");
- load();
+document.getElementById('addBtn').onclick=async()=>{
+ try{
+  await addDoc(collection(db,"venu"),{
+   Title:document.getElementById('title').value,
+   company:document.getElementById('company').value,
+   Location:document.getElementById('location').value,
+   salary:document.getElementById('salary').value,
+   category:document.getElementById('category').value,
+   companyWhatsapp:document.getElementById('whatsapp').value,
+   description:document.getElementById('description').value
+  });
+  alert('Job Added Successfully');
+  load();
+ }catch(e){
+  alert('Add Job Error: '+e.message);
+  console.error(e);
+ }
 };
 
 document.getElementById('csvBtn').onclick=()=>{
@@ -386,8 +402,40 @@ selectedOnlyBtn.onclick=()=>{
 refreshBtn.onclick=()=>load();
 
 
-window.notifyCandidate=(name,phone,job)=>{
- const msg=`Dear ${name},
+
+window.resubmitCandidate=function(name,phone,job,company){
+ if(!company) return;
+
+ const hrMsg=`Dear HR Team,
+
+We have a suitable candidate.
+
+Name: ${name}
+Phone: ${phone}
+Position: ${job}
+
+Regards,
+VenuHR`;
+
+ window.open(`https://wa.me/?text=${encodeURIComponent(hrMsg)}`,'_blank');
+
+ const candMsg=`Dear ${name},
+
+Your profile has been shared with ${company} for ${job}.
+
+Please keep your phone reachable.
+
+Regards,
+VenuHR`;
+
+ setTimeout(()=>{
+   window.open(`https://wa.me/91${String(phone).replace(/\D/g,'')}?text=${encodeURIComponent(candMsg)}`,'_blank');
+ },500);
+};
+
+window.notifyCandidate=function(name,phone,job){
+ const cleanPhone = String(phone||'').replace(/\D/g,'');
+ const msg = `Dear ${name},
 
 Your profile has been shared for ${job}.
 
@@ -396,8 +444,10 @@ Please keep your phone reachable.
 Regards,
 VenuHR`;
 
- window.open(`https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`,'_blank');
+ window.location.href =
+ `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(msg)}`;
 };
+
 
 searchCandidate.onkeyup=renderApps;
 statusFilter.onchange=renderApps;
@@ -420,7 +470,31 @@ load();
 </div>
 
 
-</div><div id="reportsPage" class="crm-page" style="display:none"><div class="card">
+</div>
+<div id="bulkSharePage" class="crm-page" style="display:none">
+<div class="card">
+<h3>📤 Multiple Candidate → Multiple Company Share</h3>
+<p>Select candidates and share to multiple companies.</p>
+
+<label>Candidate IDs / Names</label>
+<textarea placeholder="Kavitha, Ramesh, Priya"></textarea>
+
+<label>Companies</label>
+<select multiple style="width:100%;height:120px">
+<option>MedPlus</option>
+<option>Apollo</option>
+<option>Hetero</option>
+<option>Aster</option>
+</select>
+
+<br><br>
+<button>📤 Share Profiles</button>
+<button>📱 Notify Candidates</button>
+
+<p><b>Workflow:</b> Share → Notify → Track History</p>
+</div>
+</div>
+<div id="reportsPage" class="crm-page" style="display:none"><div class="card">
 <h3>🏢 Companies Module</h3>
 <input placeholder="Company Name">
 <input placeholder="HR Name">
